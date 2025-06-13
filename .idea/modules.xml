@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/AnonymousChat.iml" filepath="$PROJECT_DIR$/.idea/AnonymousChat.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../TelegramLLM/.idea/TelegramLLM.iml" filepath="$PROJECT_DIR$/../TelegramLLM/.idea/TelegramLLM.iml" />
     </modules>
   </component>
 </project>

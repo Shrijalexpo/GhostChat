@@ -186,3 +186,4 @@ def get_user_stats():
             "vip_users": 0,
             "free_users": 0
         }
+
