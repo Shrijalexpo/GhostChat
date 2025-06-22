@@ -1,8 +1,6 @@
 import json
-
 import requests
 import os
-
 import email_verification
 import lobby
 import root_json
