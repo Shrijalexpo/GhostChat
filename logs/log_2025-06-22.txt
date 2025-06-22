@@ -1,0 +1,57 @@
+
+2025-06-22 12:52:13: Bot started
+2025-06-22 12:52:15: Commands set: {'ok': True, 'result': True}
+2025-06-22 12:52:34: Gender selected, waiting for email: 1357334397, Male
+2025-06-22 12:52:55: OTP sent to email: 2023041068@mmmut.ac.in
+2025-06-22 12:53:49: Bot stopped by user
+2025-06-22 12:54:44: Bot started
+2025-06-22 12:54:45: Commands set: {'ok': True, 'result': True}
+2025-06-22 12:54:53: Gender selected, waiting for email: 1357334397, Male
+2025-06-22 12:55:18: OTP sent to email: 2023041068@mmmut.ac.in
+2025-06-22 12:57:27: Bot stopped by user
+2025-06-22 13:07:14: Bot started
+2025-06-22 13:07:15: Commands set: {'ok': True, 'result': True}
+2025-06-22 13:07:29: Gender selected, waiting for email: 1357334397, Male
+2025-06-22 13:07:51: OTP sent to email: 2023041068@mmmut.ac.in
+2025-06-22 13:08:10: Bot stopped by user
+2025-06-22 13:21:49: Bot started
+2025-06-22 13:21:51: Commands set: {'ok': True, 'result': True}
+2025-06-22 13:21:57: Error processing update: 'str' object has no attribute 'contains'
+2025-06-22 13:22:10: Error processing update: 'str' object has no attribute 'contains'
+2025-06-22 13:22:13: Bot stopped by user
+2025-06-22 13:22:40: Bot started
+2025-06-22 13:22:41: Commands set: {'ok': True, 'result': True}
+2025-06-22 13:22:48: Gender selected, waiting for email: 1357334397, Male
+2025-06-22 13:23:08: OTP sent to email: 2023041068@mmmut.ac.in
+2025-06-22 13:23:29: Added user 1357334397, Name: Shrijal Gupta, Gender: Male, Email: 2023041068@mmmut.ac.in
+2025-06-22 13:24:07: Added user 1357334397 to lobby - Gender: Male, Prefer: Any
+2025-06-22 13:34:12: Error fetching updates: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=15)
+2025-06-22 13:34:27: Added user 1357334397 to lobby - Gender: Male, Prefer: Any
+2025-06-22 13:38:53: Error fetching updates: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=15)
+2025-06-22 13:40:21: Error fetching updates: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=15)
+2025-06-22 13:40:41: Error fetching updates: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=15)
+2025-06-22 13:40:58: Error fetching updates: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=15)
+2025-06-22 13:41:32: Error fetching updates: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=15)
+2025-06-22 13:57:07: Bot stopped by user
+2025-06-22 14:42:02: Bot started
+2025-06-22 14:42:03: Commands set: {'ok': True, 'result': True}
+2025-06-22 14:42:22: Gender selected, waiting for email: 1357334397, Male
+2025-06-22 14:43:22: OTP sent to email: 23f2002752@ds.study.iitm.ac.in
+2025-06-22 14:43:47: Added user 1357334397, Name: Shrijal Gupta, Gender: Male, Email: 23f2002752@ds.study.iitm.ac.in
+2025-06-22 14:43:58: User 1357334397 preference changed to True
+2025-06-22 14:44:33: User 1357334397 preference changed to True
+2025-06-22 14:44:50: User 1357334397 preference changed to True
+2025-06-22 14:45:26: Bot stopped by user
+2025-06-22 14:45:27: Bot started
+2025-06-22 14:45:28: Commands set: {'ok': True, 'result': True}
+2025-06-22 14:45:37: User 1357334397 preference changed to False
+2025-06-22 14:46:23: Added user 1357334397 to lobby - Gender: Male, Prefer: Any
+2025-06-22 14:46:39: Bot stopped by user
+2025-06-22 15:49:15: Bot started
+2025-06-22 15:49:16: Commands set: {'ok': True, 'result': True}
+2025-06-22 15:49:26: Added user 1357334397 to lobby - Gender: Male, Prefer: Any
+2025-06-22 15:49:44: Removed user 1357334397 from lobby
+2025-06-22 15:50:03: User 1357334397 preference changed to True
+2025-06-22 15:50:15: Added user 1357334397 to lobby - Gender: Male, Prefer: Any
+2025-06-22 15:50:38: Removed user 1357334397 from lobby
+2025-06-22 15:51:02: Bot stopped by user

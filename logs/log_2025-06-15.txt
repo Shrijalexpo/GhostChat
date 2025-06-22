@@ -1,0 +1,18 @@
+
+2025-06-15 20:04:42: Bot started with referral system and VIP priority matching
+2025-06-15 20:04:43: Commands set: {'ok': True, 'result': True}
+2025-06-15 20:04:45: Unknown command from 6696235595: Hello hello
+2025-06-15 20:06:46: Added user 6696235595, Name: Pranjal Gupta, Gender: Male
+2025-06-15 20:06:47: Gender selected and user added: 6696235595, Male
+2025-06-15 20:06:53: Added user 6696235595 to lobby - Gender: Male, Prefer: Any
+2025-06-15 20:07:25: Added user 1357334397 to lobby - Gender: Male, Prefer: Any
+2025-06-15 20:07:27: VIP membership expired for 1357334397
+2025-06-15 20:07:27: Match created: 6696235595 <-> 1357334397
+2025-06-15 20:07:27: Removed user 6696235595 from lobby
+2025-06-15 20:07:27: Removed user 1357334397 from lobby
+2025-06-15 20:07:29: Successfully matched 6696235595 (Free) with 1357334397 (VIP)
+2025-06-15 20:12:50: User 6696235595 preference changed to Female
+2025-06-15 21:04:50: Processed 0 membership expiries
+2025-06-15 21:04:50: Membership expiry check completed. Expired memberships: 0
+2025-06-15 21:23:03: User 6696235595 unmatched from 1357334397
+2025-06-15 21:57:04: Bot stopped by user

@@ -14,7 +14,7 @@ def initialize_lobby():
             json.dump({}, f)
 
 
-def add_to_lobby(chat_id):
+def add_to_lobby(chat_id, match_org=False):
     """Add user to lobby for matching"""
     try:
         initialize_lobby()
@@ -31,7 +31,8 @@ def add_to_lobby(chat_id):
         lobby_data[str(chat_id)] = {
             "gender": gender,
             "prefer": prefer,
-            "type": user_type
+            "type": user_type,
+            "match_org": match_org
         }
 
         # Save back to file

@@ -76,9 +76,8 @@ def unmatch(chat_id):
         if partner_id in matches:
             del matches[partner_id]
 
-        save_matches(matches)
-        log(f"User {chat_id} unmatched from {partner_id}")
-
+    save_matches(matches)
+    log(f"User {chat_id} unmatched from {partner_id}")
     return partner_id
 
 def get_lobby_data():
@@ -91,8 +90,9 @@ def get_lobby_data():
     except:
         return {}
 
-def is_compatible(user1_data, user2_data):
+def is_compatible(user1_data, user2_data, user1_id=None, user2_id=None):
     """Check if two users are compatible for matching"""
+    # Check gender preferences
     user1_gender = user1_data.get("gender")
     user1_prefer = user1_data.get("prefer", "Any")
     user2_gender = user2_data.get("gender")
@@ -104,6 +104,38 @@ def is_compatible(user1_data, user2_data):
     # Check if user2's preference matches user1's gender
     user2_compatible = user2_prefer == "Any" or user2_prefer == user1_gender
 
+    # Check organization matching preference
+    user1_match_org = user1_data.get("match_org", False)
+    user2_match_org = user2_data.get("match_org", False)
+
+    # If both users want to match within organization, check email domains
+    if user1_match_org and user2_match_org and user1_id and user2_id:
+        try:
+            user1_full_data = user_read(user1_id)
+            user2_full_data = user_read(user2_id)
+
+            user1_email = user1_full_data.get("email", "")
+            user2_email = user2_full_data.get("email", "")
+
+            # Extract domains
+            user1_domain = user1_email.split("@")[1] if "@" in user1_email else None
+            user2_domain = user2_email.split("@")[1] if "@" in user2_email else None
+
+            # Check if domains match
+            domains_match = user1_domain and user2_domain and user1_domain == user2_domain
+
+            # Both gender preferences match AND domains match
+            return user1_compatible and user2_compatible and domains_match
+        except Exception as e:
+            log(f"Error checking email domains for compatibility: {e}")
+            # Fall back to just gender preference if there's an error
+            return user1_compatible and user2_compatible
+
+    # If one wants organization matching but other doesn't, they're incompatible
+    if user1_match_org != user2_match_org:
+        return False
+
+    # If both don't want organization matching (open category), just check gender preferences
     return user1_compatible and user2_compatible
 
 def get_user_priority(user_data, user_id):
@@ -138,7 +170,6 @@ def sort_users_by_priority(lobby_users):
 
     # Sort by priority (highest first)
     priority_users.sort(key=lambda x: x[2], reverse=True)
-
     return priority_users
 
 def get_matched():
@@ -171,7 +202,7 @@ def get_matched():
                 user2_id, user2_data, user2_priority = priority_sorted_users[j]
 
                 # Prefer VIP-VIP matches
-                if user2_priority > 1 and is_compatible(user1_data, user2_data):
+                if user2_priority > 1 and is_compatible(user1_data, user2_data, user1_id, user2_id):
                     if create_match_pair(user1_id, user2_id, user1_data, user2_data):
                         matched_users.extend([user1_id, user2_id])
                         break
@@ -184,7 +215,7 @@ def get_matched():
 
                     user2_id, user2_data, user2_priority = priority_sorted_users[j]
 
-                    if is_compatible(user1_data, user2_data):
+                    if is_compatible(user1_data, user2_data, user1_id, user2_id):
                         if create_match_pair(user1_id, user2_id, user1_data, user2_data):
                             matched_users.extend([user1_id, user2_id])
                             break
@@ -197,7 +228,7 @@ def get_matched():
 
                 user2_id, user2_data, user2_priority = priority_sorted_users[j]
 
-                if is_compatible(user1_data, user2_data):
+                if is_compatible(user1_data, user2_data, user1_id, user2_id):
                     if create_match_pair(user1_id, user2_id, user1_data, user2_data):
                         matched_users.extend([user1_id, user2_id])
                         break
@@ -233,6 +264,15 @@ def create_match_pair(user1_id, user2_id, user1_data, user2_data):
             if user1_type == "VIP":
                 user2_message += "\n✨ Your partner is a VIP member!"
 
+            # Add organization matching indicators
+            if user1_data.get("match_org") and user2_data.get("match_org"):
+                user1_email = user1_info.get("email", "")
+                user2_email = user2_info.get("email", "")
+                if user1_email and user2_email:
+                    domain = user1_email.split("@")[1]
+                    user1_message += f"\n🏛️ You're matched with someone from @{domain}!"
+                    user2_message += f"\n🏛️ You're matched with someone from @{domain}!"
+
             user1_message += "\n\nStart chatting! Use /next to find a new partner or /disconnect to end chat."
             user2_message += "\n\nStart chatting! Use /next to find a new partner or /disconnect to end chat."
 
@@ -257,6 +297,7 @@ def get_lobby_stats():
     """Get lobby statistics including VIP/Free breakdown"""
     try:
         lobby_data = get_lobby_data()
+
         stats = {
             "total_users": len(lobby_data),
             "vip_users": 0,
@@ -275,6 +316,7 @@ def get_lobby_stats():
                 stats["free_users"] += 1
 
         return stats
+
     except Exception as e:
         log(f"Error getting lobby stats: {e}")
         return {"total_users": 0, "vip_users": 0, "free_users": 0}

@@ -27,7 +27,8 @@ def set_bot_commands():
         {"command": "next", "description": "To skip and find a new partner"},
         {"command": "report", "description": "To report the current partner"},
         {"command": "settings", "description": "To manage your settings"},
-        {"command": "issue", "description": "To Report a bug"}
+        {"command": "issue", "description": "To Report a bug"},
+        {"command": "verify", "description": "Verify your email id"}
     ]
 
     data = {"commands": commands}
@@ -54,7 +55,7 @@ def check_membership_expiries():
             log(f"Error during membership expiry check: {e}")
 
 if __name__ == "__main__":
-    log("Bot started with referral system and VIP priority matching")
+    log("Bot started")
 
     # Set bot commands on startup
     set_bot_commands()

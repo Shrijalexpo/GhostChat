@@ -7,14 +7,12 @@ import root_json
 filepath = os.path.join(os.path.dirname(__file__), "Json Files", "user.json")
 referral_path = os.path.join(os.path.dirname(__file__), "Json Files", "referral.json")
 
-
 def initialize_user_file():
     """Initialize user file if it doesn't exist"""
     if not os.path.exists(filepath):
         os.makedirs(os.path.dirname(filepath), exist_ok=True)
         with open(filepath, 'w') as f:
             json.dump({}, f)
-
 
 def user_read_untagged():
     """Read all users data"""
@@ -27,22 +25,20 @@ def user_read_untagged():
         log(f"Error reading users: {e}")
         return {}
 
-
 def user_read(chat_id):
     """Read specific user data"""
     try:
         initialize_user_file()
         with open(filepath, 'r') as userfile:
             json_object = json.load(userfile)
-            return json_object[str(chat_id)]
+        return json_object[str(chat_id)]
     except KeyError:
         raise KeyError(f"User {chat_id} not found")
     except Exception as e:
         log(f"Error reading user {chat_id}: {e}")
         raise
 
-
-def add_user(chat_id, first_name, last_name, username, gender):
+def add_user(chat_id, first_name, last_name, username, gender, email=None, match_org= False):
     """Add new user to database"""
     try:
         initialize_user_file()
@@ -58,6 +54,8 @@ def add_user(chat_id, first_name, last_name, username, gender):
             "gender": gender,
             "prefer": "Any",  # Default preference
             "type": "Free",  # Default user type
+            "email": email,  # User email
+            "match_org" : False,
             "date": formatted_date,
             "created_at": now.strftime("%Y-%m-%d %H:%M:%S")
         }
@@ -66,7 +64,7 @@ def add_user(chat_id, first_name, last_name, username, gender):
         with open(filepath, 'w') as userfile:
             json.dump(dictionary, userfile, indent=4)
 
-        log(f"Added user {chat_id}, Name: {first_name} {last_name}, Gender: {gender}")
+        log(f"Added user {chat_id}, Name: {first_name} {last_name}, Gender: {gender}, Email: {email}")
 
         # Update total users count
         try:
@@ -79,12 +77,12 @@ def add_user(chat_id, first_name, last_name, username, gender):
         log(f"Error adding user {chat_id}: {e}")
         raise
 
-
 def makeVIP(chat_id):
     """Upgrade user to VIP status"""
     try:
         now = datetime.now()
         formatted_date = now.strftime("%d-%m-%Y")
+
         dictionary = user_read_untagged()
         user_data = user_read(chat_id)
 
@@ -95,6 +93,8 @@ def makeVIP(chat_id):
             "gender": user_data["gender"],
             "type": "VIP",
             "prefer": user_data.get("prefer", "Any"),
+            "email": user_data.get("email"),
+            "match_org": user_data.get("match_org"),
             "date": formatted_date,
             "created_at": user_data.get("created_at", ""),
             "vip_upgraded": now.strftime("%Y-%m-%d %H:%M:%S")
@@ -109,7 +109,6 @@ def makeVIP(chat_id):
         log(f"Error making user {chat_id} VIP: {e}")
         raise
 
-
 def changePrefer(chat_id, prefer):
     """Change user's gender preference"""
     try:
@@ -123,6 +122,8 @@ def changePrefer(chat_id, prefer):
             "gender": user_data["gender"],
             "type": user_data.get("type", "Free"),
             "prefer": prefer,
+            "email": user_data.get("email"),
+            "match_org": user_data.get("match_org"),
             "date": user_data.get("date", ""),
             "created_at": user_data.get("created_at", ""),
             "preference_updated": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
@@ -140,6 +141,37 @@ def changePrefer(chat_id, prefer):
         log(f"Error changing preference for user {chat_id}: {e}")
         raise
 
+def changeOrgPrefer(chat_id, OrgPrefer):
+    """Change user's Organisation match preference"""
+    try:
+        dictionary = user_read_untagged()
+        user_data = user_read(chat_id)
+
+        dictionary[str(chat_id)] = {
+            "first_name": user_data["first_name"],
+            "last_name": user_data["last_name"],
+            "username": user_data["username"],
+            "gender": user_data["gender"],
+            "type": user_data.get("type", "Free"),
+            "prefer": user_data.get("prefer"),
+            "email": user_data.get("email"),
+            "match_org": OrgPrefer,
+            "date": user_data.get("date", ""),
+            "created_at": user_data.get("created_at", ""),
+            "preference_updated": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        }
+
+        if "vip_upgraded" in user_data:
+            dictionary[str(chat_id)]["vip_upgraded"] = user_data["vip_upgraded"]
+
+        with open(filepath, 'w') as userfile:
+            json.dump(dictionary, userfile, indent=4)
+
+        log(f"User {chat_id} preference changed to {OrgPrefer}")
+
+    except Exception as e:
+        log(f"Error changing preference for user {chat_id}: {e}")
+        raise
 
 def user_exists(chat_id):
     """Check if user exists in database"""
@@ -148,7 +180,6 @@ def user_exists(chat_id):
         return str(chat_id) in users
     except:
         return False
-
 
 def get_user_stats():
     """Get user statistics"""
@@ -186,4 +217,3 @@ def get_user_stats():
             "vip_users": 0,
             "free_users": 0
         }
-
