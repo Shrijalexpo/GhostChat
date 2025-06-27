@@ -1,0 +1,38 @@
+
+2025-06-23 13:05:06: Bot started
+2025-06-23 13:05:07: Commands set: {'ok': True, 'result': True}
+2025-06-23 13:05:23: Gender selected, waiting for email: 1261898429, Male
+2025-06-23 13:05:49: OTP sent to email: 2023041068@mmmut.ac.in
+2025-06-23 13:06:12: Added user 1261898429, Name: Abhihar , Gender: Male, Email: 2023041068@mmmut.ac.in
+2025-06-23 13:06:19: User 1261898429 preference changed to True
+2025-06-23 13:06:24: Added user 1261898429 to lobby - Gender: Male, Prefer: Any
+2025-06-23 13:07:17: Added user 1357334397 to lobby - Gender: Male, Prefer: Any
+2025-06-23 13:07:21: Added user 1357334397 to lobby - Gender: Male, Prefer: Any
+2025-06-23 13:07:46: Removed user 1357334397 from lobby
+2025-06-23 13:08:34: User 1357334397 preference changed to False
+2025-06-23 13:08:38: Added user 1357334397 to lobby - Gender: Male, Prefer: Any
+2025-06-23 13:09:51: Removed user 1261898429 from lobby
+2025-06-23 13:10:07: User 1261898429 preference changed to False
+2025-06-23 13:10:11: Added user 1261898429 to lobby - Gender: Male, Prefer: Any
+2025-06-23 13:10:11: Match created: 1357334397 <-> 1261898429
+2025-06-23 13:10:11: Removed user 1357334397 from lobby
+2025-06-23 13:10:11: Removed user 1261898429 from lobby
+2025-06-23 13:10:14: Successfully matched 1357334397 (Free) with 1261898429 (Free)
+2025-06-23 13:12:29: User 1357334397 unmatched from 1261898429
+2025-06-23 13:13:10: Bot stopped by user
+2025-06-23 16:05:06: Bot started
+2025-06-23 16:05:07: Commands set: {'ok': True, 'result': True}
+2025-06-23 16:06:35: Gender selected, waiting for email: 984565729, Male
+2025-06-23 16:07:08: OTP sent to email: 23ucs579@lnmiit.ac.in
+2025-06-23 16:08:36: Added user 984565729, Name: Garvit , Gender: Male, Email: 23ucs579@lnmiit.ac.in
+2025-06-23 16:08:53: User 984565729 preference changed to True
+2025-06-23 16:08:57: Added user 1357334397 to lobby - Gender: Male, Prefer: Any
+2025-06-23 16:09:02: Added user 984565729 to lobby - Gender: Male, Prefer: Any
+2025-06-23 16:09:16: User 984565729 preference changed to False
+2025-06-23 16:09:21: Added user 984565729 to lobby - Gender: Male, Prefer: Any
+2025-06-23 16:09:21: Match created: 1357334397 <-> 984565729
+2025-06-23 16:09:21: Removed user 1357334397 from lobby
+2025-06-23 16:09:21: Removed user 984565729 from lobby
+2025-06-23 16:09:23: Successfully matched 1357334397 (Free) with 984565729 (Free)
+2025-06-23 16:17:16: User 1357334397 unmatched from 984565729
+2025-06-23 16:17:25: Bot stopped by user
