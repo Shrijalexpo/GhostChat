@@ -1,3 +1,4 @@
+import os
 import smtplib
 import random
 import ssl
@@ -6,8 +7,9 @@ from email.message import EmailMessage
 from log import log
 
 # Email credentials
-SENDER_EMAIL = "g02.shrijal@gmail.com"  # Replace with your actual email
-SENDER_PASSWORD = "opll tzyz tvnt cien"  # App Password
+SENDER_EMAIL = 'ghostchatbot@gmail.com'
+SENDER_PASSWORD = 'cujw ozkz tigk duam'
+
 
 # Dictionary to store OTPs for verification
 otp_storage = {}
@@ -27,8 +29,8 @@ def generate_otp():
 
 def send_otp_email(receiver_email, otp):
     """Send OTP via email"""
-    subject = "Your OTP Verification Code"
-    body = f"Your OTP code is: {otp}"
+    subject = "Your OTP Verification Code - GhostChat"
+    body = f"Your OTP code is: {otp} \n \n Warm Regards,\nTeam GhostChat"
 
     msg = EmailMessage()
     msg["Subject"] = subject

@@ -330,7 +330,7 @@ def callback(text, result):
 
             # Ask for email
             send_message(chat_id=chat_id,
-                         text="Please enter your email address for verification:")
+                         text="Please enter your email address for verification\nPrefer entering your College/Company email id for getting matched within your College/Comany:")
 
             log(f"Gender selected, waiting for email: {chat_id}, {gender}")
 
@@ -374,7 +374,7 @@ def callback(text, result):
                     domain = email.split('@')[1] if '@' in email else None
 
                     # Offer organization matching if domain exists
-                    if domain:
+                    if domain and not domain.startswith('gmail') and not domain.startswith('outlook') and not domain.startswith('yahoo'):
                         org_buttons = {
                             "inline_keyboard": [
                                 [{"text": f"Match with people from @{domain}", "callback_data": f"org:yes"}],
@@ -410,10 +410,10 @@ def callback(text, result):
 
             # Store matching preference
             user_data = user_json.user_read(str(chat_id))
+            email = user_data.get("email", "")
+            domain = email.split('@')[1] if '@' in email else "your organization"
 
-            if match_org:
-                email = user_data.get("email", "")
-                domain = email.split('@')[1] if '@' in email else "your organization"
+            if match_org and not domain.startswith('gmail') and not domain.startswith('outlook') and not domain.startswith('yahoo'):
                 user_json.changeOrgPrefer(chat_id=chat_id, OrgPrefer=True)
                 send_message(chat_id=chat_id,
                             text=f"You've chosen to match with people from @{domain}.\nTo change your organisation match preference go to /settings\nUse /connect to find a chat partner!")
@@ -454,7 +454,9 @@ def callback(text, result):
                     if user_type == "Free":
                         remaining = 5 - referral_count
                         if remaining > 0:
-                            status_text += f"Refer {remaining} more users to earn VIP membership!"
+                            status_text += f"Refer {remaining} more users to earn VIP membership!\nClick /refer to get your referal link"
+                        else:
+                            status_text += "Click /refer to get your referal link"
 
                     send_message(chat_id=chat_id, text=status_text)
                 except:
@@ -506,7 +508,7 @@ def commands(text, chat_id):
                 referrer_id = None  # Invalid referral code format
 
         start_text = """
-🤖 Welcome to Anonymous Chat Bot!
+🤖 Welcome to GhostChat - An Anonymous Chat Bot!
 
 Connect with random people and have anonymous conversations!
 
@@ -564,7 +566,7 @@ Let's get started! Please select your gender below:
                 send_message(text="Please use /start first to set up your profile!", chat_id=chat_id)
                 return
 
-            bot_username = "your_bot_username"  # Replace with your actual bot username
+            bot_username = "TextGhost_bot"  # Replace with your actual bot username
             referral_link, referral_code = create_referral_link(chat_id, bot_username)
 
             if referral_link:
@@ -714,14 +716,26 @@ Enjoy chatting! 🎉
             send_message(text="Error connecting. Please try again later.", chat_id=chat_id)
 
     elif text.startswith("/disconnect"):
+        reply_markup = json.dumps({
+            "inline_keyboard": [[
+                {
+                    "text": "Fill Feedback Form",
+                    "url": "https://forms.gle/yyQ9BFdEJKxNfJhA9"
+                }
+            ]]
+        })
         try:
             if match.check_matched(chat_id):
                 partner_id = match.check_matched(chat_id)
                 match.unmatch(chat_id)
-                send_message(text="Chat ended.\nUse /connect to find a new partner!", chat_id=chat_id)
+                send_message(
+                    text="Chat ended.\nUse /connect to find a new partner!",
+                    chat_id=chat_id,
+                    reply_markup=reply_markup
+                )
                 if partner_id:
                     send_message(text="Your partner has left the chat.\nUse /connect to find a new partner!",
-                                 chat_id=partner_id)
+                                 chat_id=partner_id, reply_markup=reply_markup)
 
             elif lobby.is_in_lobby(chat_id=chat_id):
                 lobby.remove_from_lobby(chat_id=chat_id)
