@@ -2,6 +2,8 @@ from user_json import user_read
 import json
 import os
 from log import log
+from match import check_matched
+from send_updates import send_message
 
 filepath = os.path.join(os.path.dirname(__file__), "Json Files", "lobby.json")
 
@@ -16,33 +18,38 @@ def initialize_lobby():
 
 def add_to_lobby(chat_id, match_org=False):
     """Add user to lobby for matching"""
-    try:
-        initialize_lobby()
-        user_data = user_read(chat_id)
-        gender = user_data["gender"]
-        prefer = user_data.get("prefer", "Any")  # Default to Any if not set
-        user_type = user_data.get("type", "Free")  # Default to Free if not set
+    if check_matched(chat_id) == None:
+        try:
+            initialize_lobby()
+            user_data = user_read(chat_id)
+            gender = user_data["gender"]
+            prefer = user_data.get("prefer", "Any")  # Default to Any if not set
+            user_type = user_data.get("type", "Free")  # Default to Free if not set
 
-        # Read current lobby data
-        with open(filepath, 'r') as lobbyfile:
-            lobby_data = json.load(lobbyfile)
+            # Read current lobby data
+            with open(filepath, 'r') as lobbyfile:
+                lobby_data = json.load(lobbyfile)
 
-        # Add or update entry
-        lobby_data[str(chat_id)] = {
-            "gender": gender,
-            "prefer": prefer,
-            "type": user_type,
-            "match_org": match_org
-        }
+            # Add or update entry
+            lobby_data[str(chat_id)] = {
+                "gender": gender,
+                "prefer": prefer,
+                "type": user_type,
+                "match_org": match_org
+            }
 
-        # Save back to file
-        with open(filepath, 'w') as lobby_file:
-            json.dump(lobby_data, lobby_file, indent=4)
+            # Save back to file
+            with open(filepath, 'w') as lobby_file:
+                json.dump(lobby_data, lobby_file, indent=4)
 
-        log(f"Added user {chat_id} to lobby - Gender: {gender}, Prefer: {prefer}")
+            log(f"Added user {chat_id} to lobby - Gender: {gender}, Prefer: {prefer}")
 
-    except Exception as e:
-        log(f"Error adding to lobby for chat_id {chat_id}: {e}")
+        except Exception as e:
+            log(f"Error adding to lobby for chat_id {chat_id}: {e}")
+
+        else:
+            send_message(chat_id=chat_id, text="You are already matched\nClick /disconnect and try again")
+
 
 
 def remove_from_lobby(chat_id):
