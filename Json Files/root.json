@@ -1,7 +1,7 @@
 {
-    "BASE_URL": "https://api.telegram.org/bot7536924180:AAFoITD5irAn1RmeWjCuiDYyU-dYtb1V7z8",
-    "offset": 388886250,
+    "BASE_URL": "https://api.telegram.org/bot<TOKEN_ID>",
+    "offset": 0,
     "Commands": "/",
-    "Total Users": 10,
+    "Total Users": 0,
     "Last Updated": "2025-06-27 13:41:21"
 }
