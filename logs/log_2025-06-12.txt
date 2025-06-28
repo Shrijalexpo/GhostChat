@@ -1,8 +1,0 @@
-
-2025-06-12 00:05:17: Bot started with referral system and VIP priority matching
-2025-06-12 00:05:18: Commands set: {'ok': True, 'result': True}
-2025-06-12 00:25:34: Bot stopped by user
-2025-06-12 00:26:13: User 1357334397 upgraded to VIP
-2025-06-12 19:47:43: Bot started with referral system and VIP priority matching
-2025-06-12 19:47:45: Commands set: {'ok': True, 'result': True}
-2025-06-12 19:58:28: Bot stopped by user
