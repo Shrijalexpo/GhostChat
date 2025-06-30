@@ -241,6 +241,7 @@ GhostChat/
     ├── lobby.json       # Active lobby
     ├── matches.json     # Current matches
     ├── referrals.json   # Referral tracking
+    ├── membership.json  # VIP membership tracking
     └── root.json        # Bot settings
 ```
 

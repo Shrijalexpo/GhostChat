@@ -2,10 +2,22 @@ from user_json import user_read
 import json
 import os
 from log import log
-from match import check_matched
 from send_updates import send_message
 
 filepath = os.path.join(os.path.dirname(__file__), "Json Files", "lobby.json")
+matches_filepath = os.path.join(os.path.dirname(__file__), "Json Files", "matches.json")
+
+def check_match(chat_id):
+    try:
+        with open(matches_filepath, 'r') as f:
+            matches = json.load(f)
+    except:
+        matches = {}
+
+    chat_id_str = str(chat_id)
+    if chat_id_str in matches:
+        return True
+    return False
 
 
 def initialize_lobby():
@@ -18,7 +30,7 @@ def initialize_lobby():
 
 def add_to_lobby(chat_id, match_org=False):
     """Add user to lobby for matching"""
-    if check_matched(chat_id) == None:
+    if check_match(chat_id) == False:
         try:
             initialize_lobby()
             user_data = user_read(chat_id)
@@ -47,8 +59,8 @@ def add_to_lobby(chat_id, match_org=False):
         except Exception as e:
             log(f"Error adding to lobby for chat_id {chat_id}: {e}")
 
-        else:
-            send_message(chat_id=chat_id, text="You are already matched\nClick /disconnect and try again")
+    else:
+        send_message(chat_id=chat_id, text="You are already matched\nClick /disconnect and try again")
 
 
 
