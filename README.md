@@ -1,4 +1,4 @@
-# GhostChat - Anonymous Telegram Bot 👻💬
+# Anonymous Chatting Python Based Telegram ChatBot
 
 <div align="center">
 
