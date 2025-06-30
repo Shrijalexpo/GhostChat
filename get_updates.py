@@ -84,7 +84,7 @@ def handle_message(message):
                         email_verification.store_otp(chat_id, email, otp)
 
                         send_message(chat_id=chat_id,
-                                     text=f"An OTP has been sent to {email}. Please enter the 6-digit code:")
+                                     text=f"An OTP has been sent to {email}. Please enter the code: (Example: GC-XXXXXX)")
                     else:
                         send_message(chat_id=chat_id,
                                      text="Failed to send OTP. Please check your email address and try again.")
