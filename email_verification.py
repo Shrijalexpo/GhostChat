@@ -7,8 +7,8 @@ from email.message import EmailMessage
 from log import log
 
 # Email credentials
-SENDER_EMAIL = 'ghostchatbot@gmail.com'
-SENDER_PASSWORD = 'cujw ozkz tigk duam'
+SENDER_EMAIL = os.environ.get('SENDER_EMAIL', 'ghostchatbot@gmail.com')
+SENDER_PASSWORD = os.environ.get('SENDER_PASSWORD', 'cujw ozkz tigk duam')
 
 
 # Dictionary to store OTPs for verification
